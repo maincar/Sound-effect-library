@@ -216,7 +216,7 @@ fetch(CSV_URL)
         title: cols[0],
         url: cols[1],
         category: cols[2] || "未分類",
-        slug: cols[3]
+        slug: (cols[3] || "").trim()
         };
     });
     buildCategories();
@@ -252,7 +252,7 @@ function render() {
 
   // ▼ 個別効果音ページ
   if (soundSlug) {
-    const item = data.find(d => d.slug === soundSlug);
+    const item = data.find(d => d.slug === soundSlug.trim());
     if (!item) return;
 
     // SEO反映
