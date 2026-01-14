@@ -290,6 +290,18 @@ function render() {
 
   // ▼ 個別効果音ページ
   if (soundSlug) {
+
+    document.querySelector("h1").insertAdjacentHTML(
+      "afterend",
+      `<p style="text-align:center;margin:8px 0">
+        <a href="./">← 一覧へ戻る</a>
+      </p>`
+    );
+
+    // ▼ 一覧用UIを非表示にする【追加】
+    document.querySelector(".controls").style.display = "none";
+    document.getElementById("categories").style.display = "none";
+
     const item = data.find(d => d.slug === soundSlug.trim());
     if (!item) return;
 
