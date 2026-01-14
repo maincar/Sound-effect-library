@@ -179,7 +179,7 @@ const ADS_SHEET = "ads";
 const ADS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${ADS_SHEET}`;
 
 const params = new URLSearchParams(location.search);
-const soundSlug = params.get("sound");
+const soundSlug = decodeURIComponent(params.get("sound") || "");
 
 let ads = {
   feed: [],
@@ -244,9 +244,21 @@ function buildCategories() {
 }
 
 function getThumbnail(url) {
-  const id = url.split("v=")[1];
-  return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+  let id = "";
+
+  if (url.includes("youtu.be/")) {
+    id = url.split("youtu.be/")[1].split("?")[0];
+  } else if (url.includes("watch?v=")) {
+    id = url.split("watch?v=")[1].split("&")[0];
+  } else if (url.includes("/shorts/")) {
+    id = url.split("/shorts/")[1].split("?")[0];
+  }
+
+  return id
+    ? `https://img.youtube.com/vi/${id}/hqdefault.jpg`
+    : "";
 }
+
 
 function render() {
 
@@ -304,7 +316,7 @@ function render() {
 list.forEach((item, i) => {
 
   el.innerHTML += `
-    <a class="card" href="?sound=${item.slug}">
+    <a class="card" href="?sound=${encodeURIComponent(item.slug)}">
       <img src="${getThumbnail(item.url)}">
       <div class="card-title">${item.title}</div>
       <div class="card-category">${item.category}</div>
