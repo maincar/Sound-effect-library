@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://maincar.github.io/Sound-effect-library/index.html</loc>
+    <loc>https://maincar.github.io/Sound-effect-library/</loc>
   </url>
 
   <url>
-    <loc>https://maincar.github.io/Sound-effect-library/index.html?sound=door-close</loc>
+    <loc>https://maincar.github.io/Sound-effect-library/?sound=door-close</loc>
   </url>
 
 </urlset>
